@@ -1,0 +1,21 @@
+venv/
+.venv/
+.venv*/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.DS_Store
+
+# Data files (download separately via scripts/download_data.py)
+data/raw/
+data/processed/
+
+# Secrets
+.env
+
+# Streamlit cache
+.streamlit/secrets.toml
+
+# Claude Code session data
+.claude/
