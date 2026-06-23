@@ -31,11 +31,14 @@ All maps are **filled-polygon choropleths** on a dark base, with click-to-select
 
 | Source | Role |
 |--------|------|
-| `official_data_uk.csv` from [Vadimkin/ukrainian-air-raid-sirens-dataset](https://github.com/Vadimkin/ukrainian-air-raid-sirens-dataset) | **PRIMARY** — government alert API, has a `level` column (oblast/raion/hromada) |
+| Ukrainian government alert API ([alerts.in.ua](https://alerts.in.ua)) | **Origin** — official state system, issues oblast/raion/hromada alerts |
+| `official_data_uk.csv` from [Vadimkin/ukrainian-air-raid-sirens-dataset](https://github.com/Vadimkin/ukrainian-air-raid-sirens-dataset) | **PRIMARY (archive)** — CSV archive of the official API data collected since March 2022; has a `level` column (oblast/raion/hromada) |
 | `volunteer_data_uk.csv` (same repo) | **CROSS-CHECK** — independent Telegram-based collection |
 
-The two sources are independently collected; `scripts/cross_check.py` compares
-per-oblast counts between them (Spearman ρ ≈ 0.96 — they strongly agree).
+The app downloads `official_data_uk.csv` from Vadimkin's archive, which is a
+publicly maintained mirror of the government API. The volunteer dataset is
+independently collected; `scripts/cross_check.py` compares per-oblast counts
+between them (Spearman ρ ≈ 0.96 — they strongly agree).
 
 ---
 
@@ -78,7 +81,7 @@ simultaneous raion alerts), while for Kyiv the two sources nearly match.
 ## Quick Start
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Freit007/air-alert-analytics.git
 cd "ai air alert"
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
@@ -160,5 +163,6 @@ empirically distinct attack morphologies:
 
 MIT — see [LICENSE](LICENSE).
 
-- Dataset: [Vadimkin/ukrainian-air-raid-sirens-dataset](https://github.com/Vadimkin/ukrainian-air-raid-sirens-dataset)
+- Alert data origin: [alerts.in.ua](https://alerts.in.ua) (Ukrainian government official API)
+- Dataset archive: [Vadimkin/ukrainian-air-raid-sirens-dataset](https://github.com/Vadimkin/ukrainian-air-raid-sirens-dataset)
 - Map geometry: [Natural Earth](https://www.naturalearthdata.com/) (public domain)
